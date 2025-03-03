@@ -1,0 +1,39 @@
+@startuml Digrama_ER_Juego
+
+
+
+' Definir las entidades como clases
+class Usuario {
+  +int id
+  +String nombre_usuario
+  +String contrasenia
+  +String correo
+  +String rol
+}
+
+class Partida {
+  +int id
+  +int puntuacion
+  
+}
+
+class Pregunta {
+  +int id
+  +String pregunta
+  +String opcion_correcta
+}
+
+class Respuesta {
+  +int id
+  +String respuesta
+}
+
+' Relaciones
+Usuario "1" --> "0..*" Partida : Juega
+Usuario "1" --> "0..*" Pregunta : Gestiona
+Pregunta "0..*" --> "0..*" Partida : Participa en
+Usuario "1" --> "0..*" Respuesta : Responde
+Partida "1" --> "0..*" Respuesta : Incluye
+Pregunta "0..*" --> "0..*" Respuesta : Es respondida en
+
+@enduml
