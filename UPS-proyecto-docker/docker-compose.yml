@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  web:
+    container_name: nginx-server
+    build: ./nginx  # Verifica que el Dockerfile esté en este directorio
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+  db:
+    container_name: mysql-db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
